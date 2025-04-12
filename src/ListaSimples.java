@@ -1,0 +1,144 @@
+public class ListaSimples implements IEstruturaSimples {
+private Object[] listaSimples;
+private int limite; //máximo que cabe preenchido
+private int tamanho; //tamanho da lista, preenchida (sem nulos)
+private int posicao; //vai indicar onde está no momento, pra inserir um novo
+
+
+    public ListaSimples(int limite) {
+        this.limite = limite;
+        this.tamanho = 0;
+        this.posicao = 0;
+        this.listaSimples = new Object[limite];
+    }
+
+    @Override
+    public void inserirElemento(Object elemento) {
+        if (tamanho < limite) {
+            listaSimples[posicao] = elemento; //vai adicionar na posição que está no momento, um elemento novo
+            posicao++; //varredura pra ir adicionando no próximo que tiver nulo
+            tamanho++; //o tamanho da lista cresce, pois tá adicionando na não nula que achar
+        } else {
+            System.out.println("Limite da lista atingido, não há mais espaço.");
+        }
+    }
+
+    @Override
+    public void inserirElementoIndice(Object elemento, int indice) {
+        if (indice < 0 && indice >= limite) { //verificando tanto se for negativo, quanto se passar o limite
+            System.out.println("Não é possível.");
+            return;
+        } listaSimples[indice] = elemento; //adiciono no índice,igual no método de cima, porém por índice ao invés de posição
+
+        if (indice >= posicao) {
+            posicao = indice + 1; // garante que a próxima adição será na posição certa
+        }
+
+        if (listaSimples[indice] != null) {
+            tamanho++; //o tamanho só cresce se ele era nulo antes
+        }
+
+    }
+
+    @Override
+    public void inserirSequencia(Object elementos) {
+
+    }
+
+    @Override
+    public boolean removerElemento() {
+        return false;
+    }
+
+    @Override
+    public Object removerIndice(int indice) {
+        return null;
+    }
+
+    @Override
+    public void removerSequencia(Object elementos) {
+
+    }
+
+    @Override
+    public void removerTodasOcorrencias(Object elemento) {
+
+    }
+
+    @Override
+    public boolean estaCheia() {
+        if (tamanho >= limite) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean estaVazia() {
+        if (tamanho > 0) {
+            return false; //se o tamanho for mais que 0
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean buscarElemento(Object elemento) {
+        return false;
+    }
+
+    @Override
+    public Object buscarElementoIndice(int indice) {
+
+        return null;
+    }
+
+    @Override
+    public void ordenarCrescente() {
+
+    }
+
+    @Override
+    public void ordenarDecrescente() {
+
+    }
+
+    @Override
+    public int quantidadeElementos() {
+        return tamanho;
+    }
+
+    @Override
+    public void dobrarCapacidade() {
+
+    }
+
+    @Override
+    public void editarElemento(Object elementoAntigo, Object elementoNovo) {
+
+    }
+
+    @Override
+    public void limpar() {
+
+    }
+
+    @Override
+    public void exibir() {
+        for (int i = 0; i < tamanho; i++) {
+            System.out.println("Lista dos elementos: " + i);
+        }
+    }
+
+    @Override
+    public Object obterPrimeiroElemento() {
+        return null;
+    }
+
+    @Override
+    public Object obterUltimoElemento() {
+        return null;
+    }
+}
+

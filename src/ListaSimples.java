@@ -1,8 +1,8 @@
 public class ListaSimples implements IEstruturaSimples {
-private Object[] listaSimples;
-private int limite; //máximo que cabe preenchido
-private int tamanho; //tamanho da lista, preenchida (sem nulos)
-private int posicao; //vai indicar onde está no momento, pra inserir um novo
+    private Object[] listaSimples;
+    private int limite; //máximo que cabe preenchido
+    private int tamanho; //tamanho da lista, preenchida (sem nulos)
+    private int posicao; //vai indicar onde está no momento, para inserir um novo
 
 
     public ListaSimples(int limite) {
@@ -16,7 +16,7 @@ private int posicao; //vai indicar onde está no momento, pra inserir um novo
     public void inserirElemento(Object elemento) {
         if (tamanho < limite) {
             listaSimples[posicao] = elemento; //vai adicionar na posição que está no momento, um elemento novo
-            posicao++; //varredura pra ir adicionando no próximo que tiver nulo
+            posicao++; //varredura para ir adicionando no próximo que tiver nulo
             tamanho++; //o tamanho da lista cresce, pois tá adicionando na não nula que achar
         } else {
             System.out.println("Limite da lista atingido, não há mais espaço.");
@@ -28,7 +28,8 @@ private int posicao; //vai indicar onde está no momento, pra inserir um novo
         if (indice < 0 && indice >= limite) { //verificando tanto se for negativo, quanto se passar o limite
             System.out.println("Não é possível.");
             return;
-        } listaSimples[indice] = elemento; //adiciono no índice,igual no método de cima, porém por índice ao invés de posição
+        }
+        listaSimples[indice] = elemento; //adiciono no índice,igual no método de cima, porém por índice ao invés de posição
 
         if (indice >= posicao) {
             posicao = indice + 1; // garante que a próxima adição será na posição certa
@@ -47,8 +48,27 @@ private int posicao; //vai indicar onde está no momento, pra inserir um novo
 
     @Override
     public boolean removerElemento() {
-        return false;
+        if (estaVazia()) {
+            System.out.println("Não há nada para remover.");
+            return false;
+        }
+        listaSimples[0] = null; //deixando o primeiro elemento nulo
+//temos que fazer o primeiro nulo, e os outros passam para lá,
+// pois na fila sempre é substituído pelo próximo, sem ficar com a posição vazia.
+        for (int i = 0; i < tamanho - 1; i++) { //o tamanho diminui 1
+            Object proximoElemento = listaSimples[i + 1]; // pega o próximo
+            listaSimples[i] = proximoElemento; // coloca na posição atual
+        }
+        listaSimples[posicao - 1] = null; //última posição limpa
+
+        posicao--;
+        tamanho--;
+        return true;
+
     }
+
+
+
 
     @Override
     public Object removerIndice(int indice) {

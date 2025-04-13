@@ -89,6 +89,56 @@ public class Menu {
                 case 10:
                     listaSimples.exibir();
                     break;
+                case 11:
+                    System.out.print("Digite o elemento: ");
+                    Object novoElemento = scanner.next();
+                    System.out.print("Digite o índice: ");
+                    int indiceInserir = scanner.nextInt();
+                    listaSimples.inserirElementoIndice(novoElemento, indiceInserir);
+                    break;
+                case 12:
+                    System.out.print("Digite o índice do elemento a ser removido: ");
+                    int indiceRemover = scanner.nextInt();
+                    listaSimples.removerIndice(indiceRemover);
+                    break;
+                case 13:
+                    List<Object> sequenciaRemover = new ArrayList<>();
+                    System.out.println("Digite a sequência de elementos a serem removidos (pressione Enter para finalizar):");
+                    scanner.nextLine(); // Limpa o buffer
+                    while (true) {
+                        String entrada = scanner.nextLine();
+                        if (entrada.isEmpty()) {
+                            break;
+                        }
+                        sequenciaRemover.add(entrada);
+                    }
+                    listaSimples.removerSequencia(sequenciaRemover.toArray());
+                    break;
+                case 14:
+                    System.out.print("Digite o elemento a ser buscado: ");
+                    Object elementoBuscar = scanner.next();
+                    listaSimples.buscarElemento(elementoBuscar);
+                    break;
+                case 15:
+                    System.out.print("Digite o índice do elemento a ser buscado: ");
+                    int indiceBuscar = scanner.nextInt();
+                    listaSimples.buscarElementoIndice(indiceBuscar);
+                    break;
+                case 16:
+                    System.out.println("Quantidade de elementos na lista: " + listaSimples.quantidadeElementos());
+                    break;
+                case 17:
+                    listaSimples.dobrarCapacidade();
+                    break;
+                case 18:
+                    listaSimples.limpar();
+                    break;
+                case 19:
+                    System.out.println("Primeiro elemento: " + listaSimples.obterPrimeiroElemento());
+                    break;
+                case 20:
+                    System.out.println("Último elemento: " + listaSimples.obterUltimoElemento());
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;

@@ -103,14 +103,38 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void removerSequencia(Object elementos) {
+        Object[] sequencia = (Object[]) elementos;
 
+        for (int i = 0; i < sequencia.length; i++) {
+            Object elementoPraRemover = sequencia[i];
+
+            for (int j = 0; j < posicao; j++) {
+                if (listaSimples[j] != null && listaSimples[j].equals(elementoPraRemover)) { //verificacao
+
+                    // agora a parte que puxa os elementos pra cobrir o vazio
+                    for (int k = j; k < posicao - 1; k++) {
+                        listaSimples[k] = listaSimples[k + 1];
+                    }
+
+                    //diminuir os contadores, assim como em todos
+                    listaSimples[posicao - 1] = null;
+                    posicao--;
+                    tamanho--;
+                    break; // para de procurar esse item, vai pro próximo da sequência
+                }
+            }
+    }
     }
 
     @Override
     public void removerTodasOcorrencias(Object elemento) {
-
+        for (int i = 0; i < tamanho; i++) {
+            if (listaSimples[i] != null && listaSimples[i].equals(elemento)) {
+                removerIndice(i);
+                i = -1;
+            }
+        }
     }
-
     @Override
     public boolean estaCheia() {
         if (tamanho >= limite) {
@@ -205,12 +229,21 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public Object obterPrimeiroElemento() {
-        return null;
+        if (estaVazia()) {
+            System.out.println("Lista vazia!");
+            return null;
+        }
+        return listaSimples[0]; //se não está vazia, retorna o primeiro (0)
     }
 
     @Override
     public Object obterUltimoElemento() {
-        return null;
+        if (estaVazia()) {
+            System.out.println("Lista vazia!");
+            return null;
+        }
+        return listaSimples[tamanho - 1]; //se não está vazia, retorna o tamanho total -1,
+        // pois assim mostrará o último preenchido
     }
 }
 

@@ -255,13 +255,14 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void exibir() {
+        System.out.println("Lista: ");
         for (int i = 0; i < tamanho; i++) {
-            System.out.println(listaSimples[i] + " ");
+            System.out.println(listaSimples[i]);
+            }
+            if (estaVazia()) {
+                System.out.println("Lista vazia.");
+            }
         }
-        if (estaVazia()) {
-            System.out.println("Lista vazia.");
-        }
-    }
 
     @Override
     public Object obterPrimeiroElemento() {

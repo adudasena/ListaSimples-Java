@@ -122,13 +122,32 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public boolean buscarElemento(Object elemento) {
+        if (estaVazia()) {
+            return false;
+        }
+        for (int i = 0; i < tamanho; i++) {
+            if (listaSimples[i].equals(elemento)) {
+                System.out.println("Elemento " + elemento + " encontrado.");
+                return true;
+            }
+        }
+        System.out.println("Elemento não encontrado na lista.");
         return false;
     }
 
     @Override
     public Object buscarElementoIndice(int indice) {
-
-        return null;
+        if (estaVazia()) {
+            System.out.println("Lista vazia.");
+            return null;
+        }
+        Object elemento = listaSimples[indice]; //criando para usar no return
+        if (indice < 0 && indice >= limite) { //verificando tanto se for negativo, quanto se passar o limite
+            System.out.println("Não é possível.");
+            return null;
+        }
+        System.out.println("Elemento " + elemento + " encontrado no índice " + indice);
+        return elemento;
     }
 
     @Override

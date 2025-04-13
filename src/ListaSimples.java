@@ -56,23 +56,40 @@ public class ListaSimples implements IEstruturaSimples {
 //temos que fazer o primeiro nulo, e os outros passam para lá,
 // pois na fila sempre é substituído pelo próximo, sem ficar com a posição vazia.
         for (int i = 0; i < tamanho - 1; i++) { //o tamanho diminui 1
-            Object proximoElemento = listaSimples[i + 1]; // pega o próximo
-            listaSimples[i] = proximoElemento; // coloca na posição atual
+            Object proximoElemento = listaSimples[i + 1]; //pega o próximo
+            listaSimples[i] = proximoElemento; //coloca na posição atual
         }
         listaSimples[posicao - 1] = null; //última posição limpa
 
-        posicao--;
-        tamanho--;
+        posicao--; //diminui a posição atual
+        tamanho--; // diminui o total de elementos que não são nulos
         return true;
-
     }
-
-
-
 
     @Override
     public Object removerIndice(int indice) {
-        return null;
+        if (estaVazia()) {
+            System.out.println("Não há nada para remover.");
+            return null;
+        }
+        if (indice < 0 && indice >= limite) { //verificando tanto se for negativo, quanto se passar o limite
+            System.out.println("Não é possível.");
+            return null;
+        }
+        Object removido = listaSimples[indice]; //salvar o que foi removido, pois quero retornar lá embaixo qual foi removido
+
+        //também temos que fazer o primeiro nulo, e os outros passam para lá,
+// pois na fila sempre é substituído pelo próximo, sem ficar com a posição vazia.
+        for (int i = indice; i < posicao - 1; i++) {
+            listaSimples[i] = listaSimples[i + 1];
+        }
+
+        listaSimples[posicao - 1] = null; // limpa a última posição que ficou duplicada
+        posicao--; //diminui a posição atual
+        tamanho--; //diminui o total de elementos que não são nulos
+
+        System.out.println("Elemento removido: " + removido);
+        return removido;
     }
 
     @Override

@@ -43,7 +43,16 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void inserirSequencia(Object elementos) {
-
+        Object[] sequencia = (Object[]) elementos;
+        for (int i = 0; i < sequencia.length; i++) {
+            Object item = sequencia[i];
+            if (tamanho < limite) {
+                listaSimples[posicao++] = item;
+                tamanho++;
+            } else {
+                System.out.println("Lista cheia!");
+            }
+        }
     }
 
     @Override

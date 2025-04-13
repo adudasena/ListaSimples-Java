@@ -26,6 +26,16 @@ public class Menu {
             System.out.println("8. Ordenar em ordem decrescente");
             System.out.println("9. Editar elemento");
             System.out.println("10. Exibir lista");
+            System.out.println("11. Inserir elemento em índice específico");
+            System.out.println("12. Remover elemento por índice");
+            System.out.println("13. Remover sequência de elementos");
+            System.out.println("14. Buscar elemento");
+            System.out.println("15. Buscar elemento por índice");
+            System.out.println("16. Quantidade de elementos na lista");
+            System.out.println("17. Dobrar capacidade da lista");
+            System.out.println("18. Limpar lista");
+            System.out.println("19. Obter primeiro elemento");
+            System.out.println("20. Obter último elemento");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt(); //scanner vai ler a opção do usuário

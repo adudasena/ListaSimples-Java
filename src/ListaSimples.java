@@ -177,7 +177,14 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void limpar() {
+        for (int i = 0; i < tamanho; i++) {
+            listaSimples[i] = null;
+        }
+//zerar também os contadores utilizados
+        tamanho = 0;
+        posicao = 0;
 
+        System.out.println("Lista vazia.");
     }
 
     @Override

@@ -43,12 +43,12 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void inserirSequencia(Object elementos) {
-        Object[] sequencia = (Object[]) elementos;
-        for (int i = 0; i < sequencia.length; i++) {
-            Object item = sequencia[i];
-            if (tamanho < limite) {
+        Object[] sequencia = (Object[]) elementos; //tranforma em array
+        for (int i = 0; i < sequencia.length; i++) { //percorre cada elemento da sequência
+            Object item = sequencia[i]; //guarda o elemento atual
+            if (tamanho < limite) { //se ainda houver espaço no limite
                 listaSimples[posicao++] = item;
-                tamanho++;
+                tamanho++;  //aumenta o tamanho
             } else {
                 System.out.println("Lista cheia!");
             }
@@ -120,7 +120,7 @@ public class ListaSimples implements IEstruturaSimples {
                     listaSimples[posicao - 1] = null;
                     posicao--;
                     tamanho--;
-                    break; // para de procurar esse item, vai pro próximo da sequência
+                    break; // para de procurar esse, vai para o próximo da sequência
                 }
             }
     }
@@ -128,16 +128,16 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void removerTodasOcorrencias(Object elemento) {
-        for (int i = 0; i < tamanho; i++) {
-            if (listaSimples[i] != null && listaSimples[i].equals(elemento)) {
-                removerIndice(i);
+        for (int i = 0; i < tamanho; i++) { //percorre até tamanho que tem no momwnto
+            if (listaSimples[i] != null && listaSimples[i].equals(elemento)) { //se não é nulo
+                removerIndice(i); //exclui o elemento do i atual
                 i = -1;
             }
         }
     }
     @Override
     public boolean estaCheia() {
-        if (tamanho >= limite) {
+        if (tamanho >= limite) { //tamanho maior que limite
             return true;
         } else {
             return false;
@@ -147,7 +147,7 @@ public class ListaSimples implements IEstruturaSimples {
     @Override
     public boolean estaVazia() {
         if (tamanho > 0) {
-            return false; //se o tamanho for mais que 0
+            return false; //se o tamanho for mais que 0, significa que não está vazia
         } else {
             return true;
         }
@@ -185,13 +185,31 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void ordenarCrescente() {
-
+        for (int i = 0; i < tamanho - 1; i++) { //percorre toda a lista
+            for (int j = 0; j < tamanho - i - 1; j++) {
+                if ((Integer) listaSimples[j] > (Integer) listaSimples[j + 1]) { //atual e próximo precisam ser comparados
+                    Object aux = listaSimples[j]; //corrige com o aux se estiver fora da ordem
+                    listaSimples[j] = listaSimples[j + 1];
+                    listaSimples[j + 1] = aux;
+                }
+            }
+        }
+        System.out.println("Ordenado em ordem crescente.");
     }
 
     @Override
-    public void ordenarDecrescente() {
-
-    }
+    public void ordenarDecrescente() { //percorre toda a lista
+        for (int i = 0; i < tamanho - 1; i++) {
+            for (int j = 0; j < tamanho - i - 1; j++) {
+                if ((Integer) listaSimples[j] < (Integer) listaSimples[j + 1]) {
+                    Object aux = listaSimples[j]; //corrige com o aux se estiver fora da ordem
+                    listaSimples[j] = listaSimples[j + 1];
+                    listaSimples[j + 1] = aux;
+                    }
+                }
+            }
+            System.out.println("Ordenado em ordem decrescente.");
+        }
 
     @Override
     public int quantidadeElementos() {
@@ -200,20 +218,35 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void dobrarCapacidade() {
+        Object[] limiteDobrado = new Object[limite * 2]; //novo criado
+    for (int i = 0; i < tamanho; i++) {
+        limiteDobrado[i]= listaSimples[i]; //novo pro antigo
+    }
+    listaSimples= limiteDobrado; //referencia
+    limite= limite * 2; //limite recebendo x 2
 
+        System.out.println("Limite dobrado:" + limite);
     }
 
     @Override
     public void editarElemento(Object elementoAntigo, Object elementoNovo) {
-
+        int i;
+        for (i = 0; i < tamanho; i++) {
+        if (listaSimples[i] != null && listaSimples[i].equals(elementoAntigo)) {
+            listaSimples[i] = elementoNovo; // substitui o antigo pelo novo
+            System.out.println("Elemento trocado!");
+            return;
+        }
     }
+    System.out.println("Elemento antigo não encontrado.");
+        }
 
     @Override
     public void limpar() {
         for (int i = 0; i < tamanho; i++) {
             listaSimples[i] = null;
         }
-//zerar também os contadores utilizados
+    //zerar também os contadores utilizados
         tamanho = 0;
         posicao = 0;
 
@@ -223,7 +256,10 @@ public class ListaSimples implements IEstruturaSimples {
     @Override
     public void exibir() {
         for (int i = 0; i < tamanho; i++) {
-            System.out.println("Lista dos elementos: " + i);
+            System.out.println(listaSimples[i] + " ");
+        }
+        if (estaVazia()) {
+            System.out.println("Lista vazia.");
         }
     }
 

@@ -43,7 +43,7 @@ public class Menu {
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o elemento a ser inserido: ");
-                    Object elemento = scanner.next(); //elemento
+                    Object elemento = scanner.nextInt(); //elemento
                     listaSimples.inserirElemento(elemento);
                     break;
                 case 2:
@@ -82,12 +82,10 @@ public class Menu {
                     }
                     break;
                 case 7:
-                    listaSimples.ordenarCrescente();
-                    System.out.println("Lista ordenada com sucesso.");
+                    listaSimples.ordenarCrescente(); // a mensagem já aparece lá dentro
                     break;
                 case 8:
-                    listaSimples.ordenarDecrescente();
-                    System.out.println("Lista ordenada com sucesso.");
+                    listaSimples.ordenarDecrescente(); // a mensagem já aparece lá dentro
                     break;
                 case 9:
                     System.out.print("Digite o elemento antigo: ");

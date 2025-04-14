@@ -198,9 +198,9 @@ public class ListaSimples implements IEstruturaSimples {
                 int valorAtual = (Integer) listaSimples[j];
                 int proximoValor = (Integer) listaSimples[j + 1];
                 if (valorAtual > proximoValor) {
-                    Object aux = listaSimples[j];
+                    Object temp = listaSimples[j];
                     listaSimples[j] = listaSimples[j + 1];
-                    listaSimples[j + 1] = aux;
+                    listaSimples[j + 1] = temp;
                 }
             }
         }
@@ -221,9 +221,9 @@ public class ListaSimples implements IEstruturaSimples {
                 int valorAtual = (Integer) listaSimples[j];
                 int proximoValor = (Integer) listaSimples[j + 1];
                 if (valorAtual < proximoValor) {
-                    Object aux = listaSimples[j];
+                    Object temp = listaSimples[j];
                     listaSimples[j] = listaSimples[j + 1];
-                    listaSimples[j + 1] = aux;
+                    listaSimples[j + 1] = temp;
                 }
             }
         }

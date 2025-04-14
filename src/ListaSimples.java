@@ -25,7 +25,7 @@ public class ListaSimples implements IEstruturaSimples {
 
     @Override
     public void inserirElementoIndice(Object elemento, int indice) {
-        if (indice < 0 && indice >= limite) { //verificando tanto se for negativo, quanto se passar o limite
+        if (indice < 0 || indice >= limite) { //verificando tanto se for negativo, quanto se passar o limite
             System.out.println("Não é possível.");
             return;
         }
@@ -54,6 +54,7 @@ public class ListaSimples implements IEstruturaSimples {
             }
         }
     }
+
 
     @Override
     public boolean removerElemento() {
@@ -123,7 +124,7 @@ public class ListaSimples implements IEstruturaSimples {
                     break; // para de procurar esse, vai para o próximo da sequência
                 }
             }
-    }
+        }
     }
 
     @Override
@@ -135,6 +136,7 @@ public class ListaSimples implements IEstruturaSimples {
             }
         }
     }
+
     @Override
     public boolean estaCheia() {
         if (tamanho >= limite) { //tamanho maior que limite
@@ -183,34 +185,51 @@ public class ListaSimples implements IEstruturaSimples {
         return elemento;
     }
 
-    @Override
     public void ordenarCrescente() {
-        for (int i = 0; i < tamanho - 1; i++) { //percorre toda a lista
-            for (int j = 0; j < tamanho - i - 1; j++) {
-                if ((Integer) listaSimples[j] > (Integer) listaSimples[j + 1]) { //atual e próximo precisam ser comparados
-                    Object aux = listaSimples[j]; //corrige com o aux se estiver fora da ordem
-                    listaSimples[j] = listaSimples[j + 1];
-                    listaSimples[j + 1] = aux;
-                }
+        for (int i = 0; i < tamanho; i++) { //se não são nulos e inteiros
+            if (listaSimples[i] == null || !(listaSimples[i] instanceof Integer)) {
+                System.out.println("Não é possível ordenar: todos os elementos devem ser inteiros.");
+                return;
             }
         }
-        System.out.println("Ordenado em ordem crescente.");
-    }
-
-    @Override
-    public void ordenarDecrescente() { //percorre toda a lista
+        //usando bubble
         for (int i = 0; i < tamanho - 1; i++) {
             for (int j = 0; j < tamanho - i - 1; j++) {
-                if ((Integer) listaSimples[j] < (Integer) listaSimples[j + 1]) {
-                    Object aux = listaSimples[j]; //corrige com o aux se estiver fora da ordem
+                int valorAtual = (Integer) listaSimples[j];
+                int proximoValor = (Integer) listaSimples[j + 1];
+                if (valorAtual > proximoValor) {
+                    Object aux = listaSimples[j];
                     listaSimples[j] = listaSimples[j + 1];
                     listaSimples[j + 1] = aux;
-                    }
                 }
             }
-            System.out.println("Ordenado em ordem decrescente.");
         }
 
+        System.out.println("Lista ordenada em ordem crescente com sucesso.");
+    }
+
+    public void ordenarDecrescente() {
+        for (int i = 0; i < tamanho; i++) {
+            if (listaSimples[i] == null || !(listaSimples[i] instanceof Integer)) { //se não são nulos e inteiros
+                System.out.println("Não é possível ordenar: todos os elementos devem ser inteiros.");
+                return;
+            }
+        }
+
+        for (int i = 0; i < tamanho - 1; i++) { //bubble
+            for (int j = 0; j < tamanho - i - 1; j++) {
+                int valorAtual = (Integer) listaSimples[j];
+                int proximoValor = (Integer) listaSimples[j + 1];
+                if (valorAtual < proximoValor) {
+                    Object aux = listaSimples[j];
+                    listaSimples[j] = listaSimples[j + 1];
+                    listaSimples[j + 1] = aux;
+                }
+            }
+        }
+
+        System.out.println("Lista ordenada em ordem decrescente com sucesso.");
+    }
     @Override
     public int quantidadeElementos() {
         return tamanho;
